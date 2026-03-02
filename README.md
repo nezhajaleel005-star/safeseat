@@ -1,33 +1,67 @@
-# 🪑 SafeSeat – Smart Priority Seat Management System
+[SAFESEAT] 
 
-## 📌 Problem Statement
+Basic Details
 
-In public transport systems, priority seats reserved for pregnant women, elderly people, and persons with disabilities are often misused. 
+Team Name: [DUO]
+
+Team Members
+- Member 1: [Devika Manoj] - [Mar Baselios Christian College of Engineering And Technology]
+- Member 2: [Nezha Jaleel] - [Mar Baselios Christian College of Engineering And Technology]
+
+ Hosted Project Link
+[https://safeseat.vercel.app/]
+
+ Project Description
+
+[SafeSeat aims to solve this problem using a smart digital platform that enables seat booking, voice accessibility, complaint submission, and monitoring with a fine system.]
+
+The Problem statement
+
+[In public transport systems, priority seats reserved for pregnant women, elderly people, and persons with disabilities are often misused. 
 There is no proper monitoring, booking mechanism, or complaint system to ensure fair usage of these seats.
+]
 
-SafeSeat aims to solve this problem using a smart digital platform that enables seat booking, voice accessibility, complaint submission, and monitoring with a fine system.
-
----
-https://github.com/nezhajaleel005-star/safeseat
-https://safeseat.vercel.app/
-
-## 🎯 Objective
-
-To build a socially impactful system that ensures priority seats are properly allocated and protected in public transport.
+The Solution
+[SafeSeat introduces a digital priority seat management system that allows eligible passengers to book reserved seats, check availability, and raise complaints if rules are violated. The system includes a voice interface for accessibility and an admin dashboard to monitor bookings and issue fines. This ensures fair seat allocation, accountability, and safer public transport for vulnerable groups.]
 
 ---
+ Technical Details
 
-## 🚀 Features
+Technologies/Components Used
 
-### 👤 User Module
+ Software:
+
+Frontend
+
+Built using Antigravity UI builder
+
+User-friendly interface
+
+Responsive design
+
+Voice interaction support for accessibility
+
+ Backend:
+
+Backend logic handled through Antigravity workflow automation
+
+User authentication and role-based access (User / Admin)
+
+Seat booking validation logic
+
+Complaint management system
+
+---
+
+ Features
+User Module
 - User Registration & Login
 - Voice Interface for visually impaired users
 - Priority Seat Booking
 - Real-time Seat Availability View
 - Complaint Submission System
 - Rating System for Drivers & Conductors
-
-### 🛠 Admin Module
+ Admin Module
 - Dashboard to monitor seat bookings
 - View complaints
 - Manage users
@@ -36,68 +70,57 @@ To build a socially impactful system that ensures priority seats are properly al
 
 ---
 
-## ♿ Accessibility Features
-- Voice-enabled interaction
-- Simple UI design
-- Inclusive user categories:
-  - Pregnant Women
-  - Persons with Disabilities
-  - Elderly Citizens
+ Implementation
 
----
+The SafeSeat system was implemented using the Antigravity platform to enable fast and structured development. The project follows a modular approach with separate user and admin functionalities.
 
-## 💻 Tech Stack
+1. User Module Implementation
 
-- Frontend: (React / HTML / CSS / JS)
-- Backend: (Node.js / Express)
-- Database: (MongoDB / MySQL)
-- Version Control: Git & GitHub
+Users can register and log in using secure authentication.
 
----
+After login, users can view available priority seats.
 
-## 🔐 Fine System Logic
+Eligible users can book a seat in advance.
 
-If a priority seat booked by a user is not provided by the driver or conductor:
-- User can submit complaint
-- Admin verifies issue
-- Fine is issued to responsible staff
-- Record stored in database
+A voice-enabled interface is integrated to assist visually impaired users.
 
----
+If a booked seat is not provided, users can submit a complaint through the system.
 
-## 🌍 Social Impact
+Users can rate drivers and conductors after travel.
 
-- Promotes equality in public transport
-- Supports women and disabled communities
-- Encourages accountability among transport staff
-- Creates safer and more inclusive travel environment
+2. Admin Module Implementation
 
----
+Admin dashboard displays all seat bookings in real time.
 
-## 👩‍💻 Developed By
+Admin can view and manage complaints submitted by users.
 
-- Devika Manoj
-- Nezha Jaleel
+If a complaint is verified, the system allows the admin to issue fines to drivers or conductors.
 
----
+All fine records are stored in the database for accountability.
 
-## 📅 Project Type
+3.Seat Management Logic
 
-TinkerHub / Academic Mini Project
+Seat availability is updated dynamically after each booking.
 
----
+Once booked, the seat is marked as reserved in the system.
 
-## 📌 Future Enhancements
+Complaint records are linked to specific bookings for verification.
 
-- GPS tracking integration
-- AI-based misuse detection
-- Government transport API integration
-- Mobile App version
+4. Database Integration
 
----
+The system database stores:
+
+User information
+
+Seat booking details
+
+Complaint records
+
+Fine history
+
+All modules are connected through Antigravity workflows, ensuring smooth data flow between users and administrators.
 
 
 
-## 📜 License
 
-This project is developed for academic and social innovation purposes.
+
