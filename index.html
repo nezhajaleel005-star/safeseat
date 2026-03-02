@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareTransit | Inclusive Public Transport Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div id="app">
+        <nav class="glass-nav">
+            <div class="logo" id="nav-logo">
+                <i data-lucide="bus"></i>
+                <span>CareTransit</span>
+            </div>
+            <div class="nav-links">
+                <button id="voice-trigger" class="btn-icon"
+                    style="background:none; border:none; color:white; cursor:pointer;" title="Voice Assistant [V]">
+                    <i data-lucide="mic"></i>
+                </button>
+                <div id="user-info" class="hidden" style="display:flex; align-items:center; gap:1rem;">
+                    <span id="display-name"></span>
+                    <button id="btn-logout" class="btn-secondary" style="padding:0.5rem 1rem;">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <main id="main-content" style="transition: all 0.5s ease;"></main>
+
+        <div id="voice-overlay" class="voice-overlay hidden">
+            <div class="voice-container" style="text-align: center;">
+                <div class="voice-orb"></div>
+                <h2 id="voice-status">I'm Listening...</h2>
+                <p id="voice-transcript" class="transcript"></p>
+                <div class="voice-hints" style="margin-top: 4rem; display: flex; gap: 1rem; justify-content: center;">
+                    <span class="tag">"Book seat"</span>
+                    <span class="tag">"Login"</span>
+                    <span class="tag">"Report"</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="toast" class="toast hidden"></div>
+    </div>
+
+    <!-- Templates -->
+    <template id="tpl-landing">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="tag" style="width: fit-content; margin-bottom: 2rem; color: var(--primary);">
+                    <i data-lucide="sparkles"></i> <span>Priority Travel redefined</span>
+                </div>
+                <h1>Empowering <span>Priority</span> Travel</h1>
+                <p>Advanced transport booking for disabled citizens, pregnant women, and new mothers. Experience dignity
+                    in every journey.</p>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="router.navigate('register')">Register Now <i
+                            data-lucide="chevron-right"></i></button>
+                    <button class="btn-secondary" onclick="router.navigate('login')">Sign In</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="glass-card" style="width: 100%; max-width: 500px;">
+                    <div style="display:flex; gap:1.5rem; margin-bottom:2rem;">
+                        <div class="bus-icon-bg"><i data-lucide="accessibility"></i></div>
+                        <div>
+                            <h4>Disabled Access</h4>
+                            <p style="color:var(--text-dim);">Low floor entries & priority space.</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:1.5rem; margin-bottom:2rem;">
+                        <div class="bus-icon-bg" style="color:var(--secondary);"><i data-lucide="baby"></i></div>
+                        <div>
+                            <h4>New Mothers</h4>
+                            <p style="color:var(--text-dim);">Safe stroller bays & assistance.</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:1.5rem;">
+                        <div class="bus-icon-bg" style="color:var(--accent);"><i data-lucide="shield-alert"></i></div>
+                        <div>
+                            <h4>Safety Fines</h4>
+                            <p style="color:var(--text-dim);">Automatic fines for staff misconduct.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-login">
+        <section style="display:flex; justify-content:center; padding-top:4rem;">
+            <div class="glass-card" style="width:100%; max-width:400px;">
+                <h2 style="margin-bottom:2rem;">Welcome Back</h2>
+                <form id="login-form">
+                    <div style="margin-bottom:1.5rem;">
+                        <input type="email" placeholder="Email Address" required
+                            style="width:100%; padding:1rem; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); border-radius:12px;">
+                    </div>
+                    <div style="margin-bottom:2rem;">
+                        <input type="password" placeholder="Password" required
+                            style="width:100%; padding:1rem; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); border-radius:12px;">
+                    </div>
+                    <button type="submit" class="btn-primary full-width">Sign In</button>
+                </form>
+                <p style="text-align:center; margin-top:1.5rem; color:var(--text-dim);">New here? <button
+                        class="btn-text" style="color:var(--primary); background:none; border:none; cursor:pointer;"
+                        onclick="router.navigate('register')">Register</button></p>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-register">
+        <section style="display:flex; justify-content:center; padding-top:2rem;">
+            <div class="glass-card" style="width:100%; max-width:450px;">
+                <h2 style="margin-bottom:2rem;">Create Account</h2>
+                <form id="register-form">
+                    <input type="text" placeholder="Full Name" required
+                        style="width:100%; padding:1rem; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); border-radius:12px; margin-bottom:1rem;">
+                    <input type="email" placeholder="Email" required
+                        style="width:100%; padding:1rem; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); border-radius:12px; margin-bottom:1rem;">
+                    <select required
+                        style="width:100%; padding:1rem; background:rgba(0,0,0,0.5); color:white; border:1px solid var(--glass-border); border-radius:12px; margin-bottom:1rem;">
+                        <option value="">User Type</option>
+                        <option value="disabled">Disabled Person</option>
+                        <option value="pregnant">Pregnant Woman</option>
+                        <option value="mother">New Mother</option>
+                        <option value="admin">System Admin</option>
+                    </select>
+                    <input type="password" placeholder="Create Password" required
+                        style="width:100%; padding:1rem; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); border-radius:12px; margin-bottom:2rem;">
+                    <button type="submit" class="btn-primary full-width">Join Now</button>
+                </form>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-dashboard">
+        <div class="dashboard" style="padding: 2rem 0;">
+            <h2 style="font-size:2.5rem; margin-bottom:1rem;">Available Transport</h2>
+            <div id="transport-list" class="transport-grid"></div>
+        </div>
+    </template>
+
+    <template id="tpl-complaint">
+        <section style="display:flex; justify-content:center; padding-top:2rem;">
+            <div class="glass-card" style="width:100%; max-width:500px;">
+                <h2>File a Report</h2>
+                <p style="color:var(--text-dim); margin-bottom:2rem;">Submit misconduct to trigger automated fines.</p>
+                <form id="complaint-form">
+                    <select id="issue-type" required
+                        style="width:100%; padding:1rem; background:rgba(0,0,0,0.5); color:white; border:1px solid var(--glass-border); border-radius:12px; margin-bottom:1rem;">
+                        <option value="seat_denied">Conductor Denied Seat</option>
+                        <option value="no_stop">Driver Didn't Stop</option>
+                    </select>
+                    <input type="text" id="bus-id" placeholder="Bus Number (e.g. TX-101)" required
+                        style="width:100%; padding:1rem; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); border-radius:12px; margin-bottom:1rem;">
+                    <textarea id="issue-details" placeholder="Details of incident..." required rows="4"
+                        style="width:100%; padding:1rem; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); border-radius:12px; margin-bottom:2rem;"></textarea>
+                    <button type="submit" class="btn-primary full-width" style="background:var(--danger);">Submit
+                        Infraction</button>
+                </form>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-admin">
+        <section class="admin">
+            <h2 style="margin-bottom:2rem;">Admin Console</h2>
+            <div style="display:flex; gap:2rem; margin-bottom:4rem;">
+                <div class="glass-card" style="flex:1; text-align:center;">
+                    <h3 style="color:var(--text-dim); font-size:1rem;">Total Fines Levied</h3>
+                    <p id="total-fines" style="font-size:3rem; font-weight:800; color:var(--secondary);">$0</p>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+                <div class="glass-card">
+                    <h4>Recent Activity</h4>
+                    <div id="admin-bookings-list" style="margin-top:1rem;"></div>
+                </div>
+                <div class="glass-card">
+                    <h4>Active Violations</h4>
+                    <div id="admin-violations-list" style="margin-top:1rem;"></div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
