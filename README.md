@@ -8,6 +8,8 @@ There is no proper monitoring, booking mechanism, or complaint system to ensure 
 SafeSeat aims to solve this problem using a smart digital platform that enables seat booking, voice accessibility, complaint submission, and monitoring with a fine system.
 
 ---
+https://github.com/nezhajaleel005-star/safeseat
+https://safeseat.vercel.app/
 
 ## 🎯 Objective
 
@@ -93,6 +95,8 @@ TinkerHub / Academic Mini Project
 - Mobile App version
 
 ---
+
+
 
 ## 📜 License
 
